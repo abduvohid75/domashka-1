@@ -11,6 +11,8 @@ if __name__ == '__main__':
     Item.pay_rate = 0.8
     # применяем скидку
     item1.apply_discount()
+    #item2.apply_discount()
+
 
     print(item1.price)  # 8000.0
     print(item2.price)  # 20000
