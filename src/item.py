@@ -1,4 +1,5 @@
 import csv
+import json
 
 
 class Item:
@@ -8,7 +9,7 @@ class Item:
     pay_rate = 1.0
     all = []
 
-    def __init__(self, name: str, price: float, quantity: int) -> None:
+    def __init__(self, name: str, price: float, quantity: int):
         """
         Создание экземпляра класса item.
 
@@ -25,8 +26,8 @@ class Item:
     @property
     def name(self):
         return self.__name
-    def name.setter
-    def name(self,name):
+    @name.setter
+    def name(self, name):
         if len(name) <= 10:
             self.__name = name
         else:
@@ -51,11 +52,13 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
 
-        with open('C:\Users\abduvohid.rashidov\PycharmProjects\domashka-1\src', newline='') as csvfile:
+        with open('C:\Users\abduvohid.rashidov\PycharmProjects\domashka-1\src\items.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             cls.all.clear()
             for row in reader:
-                cls.all.append(row)
+                print(row)
+                cls.all.append(cls(row['name'], int(row['price']), int(row['quantity'])))
+
         return len(cls.all)
 
     @staticmethod
