@@ -13,3 +13,9 @@ def test_calculate_total_price():
 def test_apply_discount():
     assert  item1.price * Item.pay_rate == 8000
     assert  item2.price * Item.pay_rate == 16000
+
+def test_repr():
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+def test_str():
+    assert str(item1) == 'Смартфон'
