@@ -1,6 +1,6 @@
 import csv
 import json
-
+import os
 
 class Item:
     """
@@ -32,7 +32,11 @@ class Item:
             self.__name = name
         else:
             print('Длина товара превышает 10 символов')
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
+    def __str__(self):
+        return f"{self.__name}"
 
     def calculate_total_price(self) -> float:
         """
@@ -51,8 +55,8 @@ class Item:
         self.price *= self.pay_rate
     @classmethod
     def instantiate_from_csv(cls):
-
-        with open('C:\Users\abduvohid.rashidov\PycharmProjects\domashka-1\src\items.csv', newline='') as csvfile:
+        path = os.path.join(os.path.dirname(__file__), "items.csv")
+        with open(path, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             cls.all.clear()
             for row in reader:
@@ -64,23 +68,3 @@ class Item:
     @staticmethod
     def string_to_number(number):
         return int(float(number))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
