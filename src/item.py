@@ -33,7 +33,7 @@ class Item:
         else:
             print('Длина товара превышает 10 символов')
     def __repr__(self):
-        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity}, {self.number_of_sim})"
 
     def __str__(self):
         return f"{self.__name}"
