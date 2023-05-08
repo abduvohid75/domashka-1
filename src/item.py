@@ -47,6 +47,8 @@ class Item:
 
         return self.price * self.quantity
 
+    def __add__(self, other):
+        return int(self.quantity) + int(other.quantity)
 
     def apply_discount(self) -> None:
         """
@@ -68,3 +70,4 @@ class Item:
     @staticmethod
     def string_to_number(number):
         return int(float(number))
+
