@@ -48,6 +48,8 @@ class Item:
         return self.price * self.quantity
 
     def __add__(self, other):
+        if not isinstance(other, Phone):
+            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
         return int(self.quantity) + int(other.quantity)
 
     def apply_discount(self) -> None:
