@@ -2,6 +2,7 @@ import csv
 import json
 import os
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -48,8 +49,8 @@ class Item:
         return self.price * self.quantity
 
     def __add__(self, other):
-        if not isinstance(other, Phone):
-            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
+        if not isinstance(other, Item):
+            raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля')
         return int(self.quantity) + int(other.quantity)
 
     def apply_discount(self) -> None:
@@ -72,4 +73,14 @@ class Item:
     @staticmethod
     def string_to_number(number):
         return int(float(number))
+
+    @property
+    def number_of_sim(self):
+        return self.__number_of_sim
+
+    @number_of_sim.setter
+    def number_of_sim(self, count_sim):
+        if not isinstance(count_sim, int) or count_sim <= 0:
+            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля")
+        self.__number_of_sim = count_sim
 
