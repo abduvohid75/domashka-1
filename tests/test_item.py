@@ -28,5 +28,6 @@ def test_str():
 def test_add():
     assert item1 + phone1 == 25
 
-
+def test_instantiate_from_csv():
+    assert Item.instantiate_from_csv() != ''
 

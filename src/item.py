@@ -27,12 +27,14 @@ class Item:
     @property
     def name(self):
         return self.__name
+
     @name.setter
     def name(self, name):
         if len(name) <= 10:
             self.__name = name
         else:
             print('Длина товара превышает 10 символов')
+
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity}, {self.number_of_sim})"
 
@@ -58,17 +60,26 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
     @classmethod
     def instantiate_from_csv(cls):
         path = os.path.join(os.path.dirname(__file__), "items.csv")
-        with open(path, newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            cls.all.clear()
-            for row in reader:
-                print(row)
-                cls.all.append(cls(row['name'], int(row['price']), int(row['quantity'])))
 
-        return len(cls.all)
+        try:
+            with open(path, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                cls.all.clear()
+                for row in reader:
+                    print(row)
+                    cls.all.append(cls(row['name'], int(row['price']), int(row['quantity'])))
+
+            return len(cls.all)
+        except FileNotFoundError :
+            print('Отсутствует файл item.csv')
+        except KeyError:
+            print('Файл item.csv поврежден')
+
+
 
     @staticmethod
     def string_to_number(number):
@@ -83,4 +94,3 @@ class Item:
         if not isinstance(count_sim, int) or count_sim <= 0:
             raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля")
         self.__number_of_sim = count_sim
-
